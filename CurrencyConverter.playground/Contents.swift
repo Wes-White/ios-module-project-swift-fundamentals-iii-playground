@@ -9,9 +9,15 @@ enum Currency {
 let usToCad: Double = 1.38
 let usToMxn: Double = 21.92
 
-var currency: Currency = .cad
+var currency: Currency = .mxn
 
-func convert(dollars: Double) -> Double {
+let currencyFormatter: NumberFormatter = {
+    let formatter = NumberFormatter()
+    formatter.numberStyle = .currency
+    return formatter
+} ()
+
+func convert(_ dollars: Double) -> Double {
     var total: Double = 0.0
     
     switch currency {
@@ -26,3 +32,25 @@ func convert(dollars: Double) -> Double {
     
 }
 
+func convert(amountString: String) -> String? {
+    var total: String? = nil
+    
+    guard let amount = Double(amountString) else {
+        print("We were unable to find your total.")
+        return total
+    }
+    let converted = convert(amount)
+    total = String(converted)
+    
+    guard let convertedTotal = total else {
+       return total
+    }
+    print("The value of your conversion is \(convertedTotal).")
+    return convertedTotal
+}
+
+
+
+convert(amountString: "" ) // error catch
+convert(amountString: "1")
+convert(amountString: "700")
