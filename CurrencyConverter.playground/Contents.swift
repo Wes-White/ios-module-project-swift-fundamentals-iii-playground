@@ -15,7 +15,7 @@ var currency: Currency = .mxn
 func convertTotalToCurrency(amount: Double) -> String {
     let numberFormatter = NumberFormatter()
     numberFormatter.numberStyle = .currency
-    return numberFormatter.string(from: NSNumber(value: amount))!
+    return numberFormatter.string(from: NSNumber(value: amount))! //Force unwrappring here not sure how to work around that?
 }
 
 
