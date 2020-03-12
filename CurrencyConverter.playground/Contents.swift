@@ -4,12 +4,14 @@ enum Currency {
     case usd
     case cad
     case mxn
+    case euro
 }
 
 let usToCad: Double = 1.38
 let usToMxn: Double = 21.92
+let usToEuro: Double = 0.90
 
-var currency: Currency = .mxn
+var currency: Currency = .euro
 
 
 func convertTotalToCurrency(amount: Double) -> String {
@@ -27,6 +29,8 @@ func convert(_ dollars: Double) -> Double {
         total = dollars * usToCad
     case .mxn:
         total = dollars * usToMxn
+    case .euro:
+        total = dollars * usToEuro
     default:
         total = dollars
     }
