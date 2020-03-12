@@ -11,11 +11,13 @@ let usToMxn: Double = 21.92
 
 var currency: Currency = .mxn
 
-let currencyFormatter: NumberFormatter = {
-    let formatter = NumberFormatter()
-    formatter.numberStyle = .currency
-    return formatter
-} ()
+
+func convertTotalToCurrency(amount: Double) -> String {
+    let numberFormatter = NumberFormatter()
+    numberFormatter.numberStyle = .currency
+    return numberFormatter.string(from: NSNumber(value: amount))!
+}
+
 
 func convert(_ dollars: Double) -> Double {
     var total: Double = 0.0
@@ -34,17 +36,20 @@ func convert(_ dollars: Double) -> Double {
 
 func convert(amountString: String) -> String? {
     var total: String? = nil
+   
     
     guard let amount = Double(amountString) else {
         print("We were unable to find your total.")
         return total
     }
     let converted = convert(amount)
-    total = String(converted)
+    print("THIS IS CONVERTED \(converted)")
+    total = convertTotalToCurrency(amount: converted)
     
     guard let convertedTotal = total else {
        return total
     }
+    
     print("The value of your conversion is \(convertedTotal).")
     return convertedTotal
 }
